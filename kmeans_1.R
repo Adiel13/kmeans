@@ -56,7 +56,7 @@ data3[394, "anio_carne"] <- 1996
 
 data3$edad <-as.integer(data3$anio)-as.integer(data3$anio_carne)+18
 
-clusterk <- kmeans(data3, centers=3)
+clusterk <- kmeans(data3, centers=4)
 
 data3
 
@@ -65,3 +65,65 @@ ggplot(data3, aes(x = edad, y = Lab. , color = as.factor(clusterk$cluster))) +
   geom_point(data = as.data.frame(clusterk$centers), aes(x = edad, y = Lab.), color = "black", size = 4, shape = 17) +
   labs(title = "Edad vs Lab") +
   theme_minimal()
+
+ggplot(data3, aes(x = anio , y = Lab. , color = as.factor(clusterk$cluster))) +
+  geom_point() + 
+  geom_point(data = as.data.frame(clusterk$centers), aes(x = anio , y = Lab.), color = "black", size = 4, shape = 17) +
+  labs(title = "Año vs Lab") +
+  theme_minimal()
+
+ggplot(data3, aes(x = Nota.Final , y = Lab. , color = as.factor(clusterk$cluster))) +
+  geom_point() + 
+  geom_point(data = as.data.frame(clusterk$centers), aes(x = Nota.Final , y = Lab.), color = "blue", size = 4, shape = 17) +
+  labs(title = "Nota Final vs Lab") +
+  theme_minimal()
+
+clusterk <- kmeans(data3, centers=2)
+
+ggplot(data3, aes(x = genero, y = Lab. , color = as.factor(clusterk$cluster))) +
+  geom_point() + 
+  geom_point(data = as.data.frame(clusterk$centers), aes(x = Nota.Final , y = Lab.), color = "blue", size = 4, shape = 17) +
+  labs(title = "Nota Final vs Lab") +
+  theme_minimal() +
+  xlim (0,2)
+
+ data4 <- subset(data3, genero == 0)
+
+ clusterk2 <- kmeans(data4, centers=3)
+ data4
+ ggplot(data4, aes(x = edad, y = Lab. , color = as.factor(clusterk2$cluster))) +
+   geom_point() + 
+   geom_point(data = as.data.frame(clusterk2$centers), aes(x = edad, y = Lab.), color = "black", size = 4, shape = 17) +
+   labs(title = "Edad vs Lab (mujeres)") +
+   theme_minimal()
+
+ ggplot(data4, aes(x = edad, y = Nota.Final , color = as.factor(clusterk2$cluster))) +
+   geom_point() + 
+   geom_point(data = as.data.frame(clusterk2$centers), aes(x = edad, y = Nota.Final), color = "black", size = 4, shape = 17) +
+   labs(title = "Edad vs Lab (hombres)") +
+   theme_minimal()
+ 
+ 
+ data5 <- subset(data3, genero == 1)
+ clusterk3 <- kmeans(data5, centers=3)
+ 
+ ggplot(data5, aes(x = edad, y = Nota.Final , color = as.factor(clusterk3$cluster))) +
+   geom_point() + 
+   geom_point(data = as.data.frame(clusterk3$centers), aes(x = edad, y = Nota.Final), color = "black", size = 4, shape = 17) +
+   labs(title = "Edad vs Lab (hombres)") +
+   theme_minimal()
+ 
+ ggplot(data5, aes(x = edad, y = Lab. , color = as.factor(clusterk3$cluster))) +
+   geom_point() + 
+   geom_point(data = as.data.frame(clusterk3$centers), aes(x = edad, y = Lab.), color = "black", size = 4, shape = 17) +
+   labs(title = "Edad vs Lab (hombres)") +
+   theme_minimal()
+ 
+ ggplot(data5, aes(x = Lab., y = edad , color = as.factor(clusterk3$cluster))) +
+   geom_point() + 
+   geom_point(data = as.data.frame(clusterk3$centers), aes(x = Lab., y = edad), color = "black", size = 4, shape = 17) +
+   labs(title = "Edad vs Lab (hombres)") +
+   theme_minimal()
+ 
+ 
+ 
