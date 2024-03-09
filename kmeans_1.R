@@ -56,3 +56,12 @@ data3[394, "anio_carne"] <- 1996
 
 data3$edad <-as.integer(data3$anio)-as.integer(data3$anio_carne)+18
 
+clusterk <- kmeans(data3, centers=3)
+
+data3
+
+ggplot(data3, aes(x = edad, y = Lab. , color = as.factor(clusterk$cluster))) +
+  geom_point() + 
+  geom_point(data = as.data.frame(clusterk$centers), aes(x = edad, y = Lab.), color = "black", size = 4, shape = 17) +
+  labs(title = "Edad vs Lab") +
+  theme_minimal()
